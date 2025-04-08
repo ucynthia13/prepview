@@ -1,3 +1,5 @@
+"use server"
+
 import {initializeApp, getApp, getApps} from 'firebase/app'
 import { getAuth } from 'firebase/auth'
 import { getAnalytics } from "firebase/analytics";

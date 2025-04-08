@@ -49,7 +49,7 @@ const AuthForm = ({type}: {type: formType}) => {
         }else {
             const { email, password } = values;
             const userCredentials = await signInWithEmailAndPassword(auth, email, password)
-            const idToken = userCredentials.user.getIdToken()
+            const idToken = await userCredentials.user.getIdToken()
             if(!idToken){
                 toast.error("Signin failed")
                 return
