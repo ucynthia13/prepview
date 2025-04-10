@@ -20,6 +20,11 @@ export async function signup (params: SignUpParams){
         await db.collection("users").doc(uid).set({
             name, email
         })
+
+        return{
+            success: true,
+            message: "User created successfully",
+        }
     } catch (error: any) {
         if(error.code === "auth/email-already-exists"){
             return {
@@ -75,4 +80,9 @@ export async function setSessionCookie(idToken: string){
         path: "/",
         sameSite: "lax",
     })
+}
+
+export async function logout(){
+    const cookieStore = await cookies()
+    cookieStore.delete("session")
 }

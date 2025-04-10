@@ -2,7 +2,6 @@
 
 import {initializeApp, getApp, getApps} from 'firebase/app'
 import { getAuth } from 'firebase/auth'
-import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from 'firebase-admin/firestore';
 
 const firebaseConfig = {
@@ -19,4 +18,3 @@ const firebaseConfig = {
 const app = !getApps.length? initializeApp(firebaseConfig) : getApp();
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-const analytics = getAnalytics(app);
