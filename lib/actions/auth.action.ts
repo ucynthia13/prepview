@@ -25,14 +25,14 @@ export async function signup (params: SignUpParams){
             success: true,
             message: "User created successfully",
         }
-    } catch (error: any) {
-        if(error.code === "auth/email-already-exists"){
+    } catch (error) {
+        if ((error as { code: string }).code === "auth/email-already-exists") {
             return {
                 success: false,
                 message: "Email already exists"
             }
         }
-        if(error.code === "auth/invalid-email"){
+        if ((error as { code: string }).code === "auth/invalid-email"){
             return {
                 success: false,
                 message: "Invalid email"
@@ -40,7 +40,7 @@ export async function signup (params: SignUpParams){
         }
         return {
             success: false, 
-            message: error.message
+            message: (error as Error).message
         }
     }
 
@@ -57,11 +57,11 @@ export async function login (params: SignInParams){
             }
         }
         await setSessionCookie(idToken)
-    }catch (error: any) {   
+    }catch (error) {   
         console.error(error)
         return {
             success: false,
-            message: error.message
+            message: (error as Error).message
         }
     }
 
