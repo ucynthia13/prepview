@@ -235,6 +235,7 @@
     .card-content {
       @apply flex flex-col gap-2 justify-center items-center p-7 dark-gradient rounded-2xl min-h-full;
     }
+
   }
 
   .transcript-border {
@@ -247,6 +248,10 @@
         @apply text-lg text-center text-white;
       }
     }
+  }
+
+  .vapi-scripts {
+    @apply w-full flex flex-col items-center justify-center gap-4;
   }
 
   .section-feedback {

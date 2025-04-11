@@ -5,7 +5,7 @@ const Interview = () => {
   return (
     <>
     <h3>Interview Question</h3>
-    <AgentCard userName='Cynthia' type={'generate'}/>
+    <AgentCard userName='Cynthia' />
     </>
   )
 }
