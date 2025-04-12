@@ -6,6 +6,7 @@ import { dummyInterviews } from "@/constants";
 import InterviewCard from "@/components/page-components/InterviewCard";
 
 const RootPage = () => {
+  // const 
   return (
     <>
       <section className="card-cta">

@@ -24,9 +24,10 @@ import {
 import { auth } from "@/firebase/client";
 import { signup, login } from "@/lib/actions/auth.action";
 import { toast } from "sonner";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 
 const AuthForm = ({ type }: { type: formType }) => {
+  const router = useRouter();
   const authFormSchema = formSchema(type);
   const form = useForm<z.infer<typeof authFormSchema>>({
     resolver: zodResolver(authFormSchema),
@@ -133,7 +134,7 @@ const AuthForm = ({ type }: { type: formType }) => {
               <p className="text-sm">
                 Already have an account?
                 <span>
-                  <Link href="/login"> Login</Link>
+                  <Link href="/login">Login</Link>
                 </span>
               </p>
             ) : (

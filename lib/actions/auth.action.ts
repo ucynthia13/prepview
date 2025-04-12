@@ -82,6 +82,36 @@ export async function setSessionCookie(idToken: string){
     })
 }
 
+export async function getCurrentUser(): Promise<User | null>{
+    const cookieStore = await cookies()
+    const session = await cookieStore.get("session")
+    if(!session){
+        return null
+    }
+    try {
+        const claims = await auth.verifySessionCookie(session.value, true)
+
+        const userRecord = await db.collection("users").doc(claims.uid).get()
+        if(!userRecord.exists) return null
+
+        return {
+            ...userRecord.data(),
+            id: userRecord.id,
+        } as User
+
+    } catch (error) {
+        console.log(error)
+
+        return null
+    }
+
+}
+
+export async function isAuthenticated(){
+    const user = await getCurrentUser()
+    return !!user
+}
+
 export async function logout(){
     const cookieStore = await cookies()
     cookieStore.delete("session")
