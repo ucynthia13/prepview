@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 import InterviewCard from "@/components/page-components/InterviewCard";
@@ -33,14 +32,14 @@ async function Home() {
             <Link href="/interview">Start an Interview</Link>
           </Button>
         </div>
-
+{/* 
         <Image
-          src="/robot.png"
+          src="/robot.jpg"
           alt="robo-dude"
-          width={400}
-          height={400}
-          className="max-sm:hidden"
-        />
+          width={600}
+          height={600}
+          className="max-sm:hidden rounded-full object-cover size-[120px]"
+        /> */}
       </section>
 
       <section className="flex flex-col gap-6 mt-8">
@@ -60,7 +59,7 @@ async function Home() {
               />
             ))
           ) : (
-            <p>You haven&apos;t taken any interviews yet</p>
+            <p>No Interview taken yet!</p>
           )}
         </div>
       </section>

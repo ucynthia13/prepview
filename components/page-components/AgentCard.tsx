@@ -149,20 +149,17 @@ const AgentCard = ({
     <>
       <div className="call-view">
         <div className="card-interviewer">
-          <div className="avatar">
             <Image
-              src="/ai-avatar.png"
+              src="/interviewer.png"
               alt="profile-image"
-              width={65}
-              height={54}
-              className="object-cover"
+              width={50}
+              height={50}
+              className="rounded-full object-cover size-[120px]"
             />
             {isSpeaking && <span className="animate-speak" />}
-          </div>
           <h3>AI Interviewer</h3>
         </div>
 
-        {/* User Profile Card */}
         <div className="card-border">
           <div className="card-content">
             <Image
