@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import {
   Form,
   FormItem,
@@ -25,6 +24,7 @@ import { auth } from "@/firebase/client";
 import { signup, login } from "@/lib/actions/auth.action";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { PasswordInput } from "../ui/password-input";
 
 const AuthForm = ({ type }: { type: formType }) => {
   const router = useRouter();
@@ -41,13 +41,11 @@ const AuthForm = ({ type }: { type: formType }) => {
   const onSubmit = async (values: z.infer<typeof authFormSchema>) => {
     if (type === "signup") {
       const { fullNames, email, password } = values;
-      //user authentication
       const userCredentials = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
-      //sign up
       const result = await signup({
         uid: userCredentials.user.uid,
         name: fullNames!,
@@ -84,7 +82,6 @@ const AuthForm = ({ type }: { type: formType }) => {
     <div className="mt-32 card-border mx-auto lg:min-w-[566px]">
       <div className="flex flex-col card p-14 gap-6">
         <div className="flex flex-row gap-2 justify-center">
-          <Image src="/logo.svg" width={20} height={20} alt="Logo" />
           <h1 className="font-semibold text-lg">PrepView</h1>
         </div>
         <Form {...form}>
@@ -121,27 +118,36 @@ const AuthForm = ({ type }: { type: formType }) => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input {...field} placeholder="Enter your password" />
+                    <PasswordInput
+                      {...field}
+                      placeholder="Enter your password"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" className="rounded-full w-full">
+            <Button type="submit" className="rounded-full w-full py-3 cursor-pointer">
               {type === "signup" ? "Create Account" : "Login"}
             </Button>
             {type === "signup" ? (
               <p className="text-sm">
                 Already have an account?
                 <span>
-                  <Link href="/login">Login</Link>
+                  <Link href="/login" className="font-bold underline">
+                    {" "}
+                    Login
+                  </Link>
                 </span>
               </p>
             ) : (
               <p className="text-sm">
                 Have no account?
                 <span>
-                  <Link href="/signup"> Signup</Link>
+                  <Link href="/signup" className="font-bold underline">
+                    {" "}
+                    Signup
+                  </Link>
                 </span>
               </p>
             )}
