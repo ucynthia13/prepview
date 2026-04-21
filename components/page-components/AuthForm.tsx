@@ -6,6 +6,7 @@ import {
   FormItem,
   FormControl,
   FormField,
+  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -25,7 +26,6 @@ import { signup, login } from "@/lib/actions/auth.action";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { PasswordInput } from "../ui/password-input";
-import { Label } from "../ui/label";
 
 const AuthForm = ({ type }: { type: formType }) => {
   const router = useRouter();
@@ -56,6 +56,7 @@ const AuthForm = ({ type }: { type: formType }) => {
 
       if (!result?.success) {
         toast.error(result?.message);
+        return;
       }
       toast.success("Account created successfully");
       router.push("/login");
@@ -71,17 +72,16 @@ const AuthForm = ({ type }: { type: formType }) => {
         toast.error("Signin failed");
         return;
       }
-      await login({
-        email,
-        idToken,
-      });
+      await login({ email, idToken });
       toast.success("Login successfully");
       router.push("/");
     }
   };
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 max-h-screen overflow-hidden">
-      <div className="flex flex-col justify-center w-full border-r border-input/50">
+    <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
+      {/* Left panel */}
+      <div className="flex flex-col justify-center items-center w-full border-r border-input/50">
         <div className="flex flex-row gap-2 justify-center mb-4">
           <h1 className="font-bold text-3xl md:text-4xl">PrepView</h1>
         </div>
@@ -94,13 +94,9 @@ const AuthForm = ({ type }: { type: formType }) => {
                   name="fullNames"
                   render={({ field }) => (
                     <FormItem>
+                      <FormLabel htmlFor="fullNames">Full Names</FormLabel>
                       <FormControl>
-                        <div className="flex flex-col gap-3">
-                          <Label htmlFor="fullNames">
-                            Full Names
-                          </Label>
-                          <Input {...field} placeholder="Enter your full names" />
-                        </div>
+                        <Input {...field} id="fullNames" placeholder="Enter your full names" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -112,13 +108,9 @@ const AuthForm = ({ type }: { type: formType }) => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
+                    <FormLabel htmlFor="email">Email address</FormLabel>
                     <FormControl>
-                      <div className="flex flex-col gap-3">
-                        <Label htmlFor="email">
-                          Email address
-                        </Label>
-                        <Input {...field} placeholder="Enter your email address" />
-                      </div>
+                      <Input {...field} id="email" placeholder="Enter your email address" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -129,25 +121,28 @@ const AuthForm = ({ type }: { type: formType }) => {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
+                    <FormLabel htmlFor="password">Password</FormLabel>
                     <FormControl>
-                      <div className="flex flex-col gap-3">
-                      <Label htmlFor="password">
-                        Password
-                      </Label>
                       <PasswordInput
                         {...field}
+                        id="password"
                         placeholder="Enter your password"
                       />
-                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Link href="/forgot-password" className="text-sm text-end block text-primary underline">
+              <Link
+                href="/forgot-password"
+                className="text-sm text-end block text-primary underline"
+              >
                 Forgot password?
               </Link>
-              <Button type="submit" className="rounded-lg w-full py-6 cursor-pointer">
+              <Button
+                type="submit"
+                className="rounded-lg w-full py-6 cursor-pointer"
+              >
                 {type === "signup" ? "Create Account" : "Login"}
               </Button>
               {type === "signup" ? (
@@ -155,8 +150,7 @@ const AuthForm = ({ type }: { type: formType }) => {
                   Already have an account?
                   <span>
                     <Link href="/login" className="font-bold underline">
-                      {" "}
-                      Login
+                      {" "}Login
                     </Link>
                   </span>
                 </p>
@@ -165,8 +159,7 @@ const AuthForm = ({ type }: { type: formType }) => {
                   Have no account?
                   <span>
                     <Link href="/signup" className="font-bold underline">
-                      {" "}
-                      Signup
+                      {" "}Signup
                     </Link>
                   </span>
                 </p>
@@ -175,11 +168,13 @@ const AuthForm = ({ type }: { type: formType }) => {
           </Form>
         </div>
       </div>
-      <div className="hidden md:block">
+
+      {/* Right panel */}
+      <div className="hidden lg:block">
         <img
           src="/auth-bg.jpg"
           alt="Auth background image"
-          className="h-full w-full object-cover"
+          className="h-screen w-full object-cover sticky top-0"
         />
       </div>
     </div>
