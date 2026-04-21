@@ -69,7 +69,7 @@ const AuthForm = ({ type }: { type: formType }) => {
       );
       const idToken = await userCredentials.user.getIdToken();
       if (!idToken) {
-        toast.error("Signin failed");
+        toast.error("Invalid Credentials");
         return;
       }
       await login({ email, idToken });

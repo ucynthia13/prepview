@@ -21,10 +21,10 @@ async function Home() {
 
   return (
     <>
-      <section className="card-cta">
-        <div className="flex flex-col gap-6 max-w-lg">
-          <h2>Get Interview-Ready with AI-Powered Practice & Feedback</h2>
-          <p className="text-lg">
+      <section className="bg-foreground rounded-lg p-12 md:p-16 flex flex-col md:flex-row items-center gap-8">
+        <div className="flex flex-col gap-6 max-w-3xl text-background">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-semibold">Get Interview-Ready with AI-Powered Practice & Feedback</h2>
+          <p className="text-muted-foreground">
             Practice real interview questions & get instant feedback
           </p>
 
