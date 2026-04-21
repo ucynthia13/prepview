@@ -18,9 +18,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="light">
       <body
-        className={`${monaSans.variable} antialiased pattern`}
+        className={`${monaSans.variable} antialiased`}
       >
         {children}
       </body>

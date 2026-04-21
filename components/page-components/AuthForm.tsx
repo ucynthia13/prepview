@@ -25,6 +25,7 @@ import { signup, login } from "@/lib/actions/auth.action";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { PasswordInput } from "../ui/password-input";
+import { Label } from "../ui/label";
 
 const AuthForm = ({ type }: { type: formType }) => {
   const router = useRouter();
@@ -79,80 +80,107 @@ const AuthForm = ({ type }: { type: formType }) => {
     }
   };
   return (
-    <div className="mt-32 card-border mx-auto lg:min-w-[566px]">
-      <div className="flex flex-col card p-14 gap-6">
-        <div className="flex flex-row gap-2 justify-center">
-          <h1 className="font-semibold text-lg">PrepView</h1>
+    <div className="grid grid-cols-1 md:grid-cols-2 max-h-screen overflow-hidden">
+      <div className="flex flex-col justify-center w-full border-r border-input/50">
+        <div className="flex flex-row gap-2 justify-center mb-4">
+          <h1 className="font-bold text-3xl md:text-4xl">PrepView</h1>
         </div>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            {type === "signup" && (
+        <div className="flex flex-col p-14 gap-6 max-w-xl w-full mx-auto">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              {type === "signup" && (
+                <FormField
+                  control={form.control}
+                  name="fullNames"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <div className="flex flex-col gap-3">
+                          <Label htmlFor="fullNames">
+                            Full Names
+                          </Label>
+                          <Input {...field} placeholder="Enter your full names" />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
               <FormField
                 control={form.control}
-                name="fullNames"
+                name="email"
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input {...field} placeholder="Enter your full names" />
+                      <div className="flex flex-col gap-3">
+                        <Label htmlFor="email">
+                          Email address
+                        </Label>
+                        <Input {...field} placeholder="Enter your email address" />
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-            )}
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input {...field} placeholder="Enter your email address" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <div className="flex flex-col gap-3">
+                      <Label htmlFor="password">
+                        Password
+                      </Label>
+                      <PasswordInput
+                        {...field}
+                        placeholder="Enter your password"
+                      />
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Link href="/forgot-password" className="text-sm text-end block text-primary underline">
+                Forgot password?
+              </Link>
+              <Button type="submit" className="rounded-lg w-full py-6 cursor-pointer">
+                {type === "signup" ? "Create Account" : "Login"}
+              </Button>
+              {type === "signup" ? (
+                <p className="text-sm">
+                  Already have an account?
+                  <span>
+                    <Link href="/login" className="font-bold underline">
+                      {" "}
+                      Login
+                    </Link>
+                  </span>
+                </p>
+              ) : (
+                <p className="text-sm text-end">
+                  Have no account?
+                  <span>
+                    <Link href="/signup" className="font-bold underline">
+                      {" "}
+                      Signup
+                    </Link>
+                  </span>
+                </p>
               )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <PasswordInput
-                      {...field}
-                      placeholder="Enter your password"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type="submit" className="rounded-full w-full py-3 cursor-pointer">
-              {type === "signup" ? "Create Account" : "Login"}
-            </Button>
-            {type === "signup" ? (
-              <p className="text-sm">
-                Already have an account?
-                <span>
-                  <Link href="/login" className="font-bold underline">
-                    {" "}
-                    Login
-                  </Link>
-                </span>
-              </p>
-            ) : (
-              <p className="text-sm">
-                Have no account?
-                <span>
-                  <Link href="/signup" className="font-bold underline">
-                    {" "}
-                    Signup
-                  </Link>
-                </span>
-              </p>
-            )}
-          </form>
-        </Form>
+            </form>
+          </Form>
+        </div>
+      </div>
+      <div className="hidden md:block">
+        <img
+          src="/auth-bg.jpg"
+          alt="Auth background image"
+          className="h-full w-full object-cover"
+        />
       </div>
     </div>
   );

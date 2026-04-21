@@ -146,9 +146,6 @@
   body {
     @apply bg-background text-foreground;
   }
-  p {
-    @apply text-light-100;
-  }
   h2 {
     @apply text-3xl font-semibold;
   }
@@ -157,9 +154,6 @@
   }
   ul {
     @apply list-disc list-inside;
-  }
-  li {
-    @apply text-light-100;
   }
 }
 
