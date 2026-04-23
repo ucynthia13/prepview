@@ -16,6 +16,8 @@ async function Home() {
     user?.id ? getLatestInterviews({ userId: user.id }) : [],
   ]);
 
+  console.log({allInterview})
+
   const hasPastInterviews = (userInterviews?.length ?? 0) > 0;
   const hasUpcomingInterviews = (allInterview?.length ?? 0)> 0;
 
@@ -32,14 +34,6 @@ async function Home() {
             <Link href="/interview">Start an Interview</Link>
           </Button>
         </div>
-{/* 
-        <Image
-          src="/robot.jpg"
-          alt="robo-dude"
-          width={600}
-          height={600}
-          className="max-sm:hidden rounded-full object-cover size-[120px]"
-        /> */}
       </section>
 
       <section className="flex flex-col gap-6 mt-8">
@@ -52,6 +46,7 @@ async function Home() {
                 key={interview.id}
                 userId={user?.id}
                 interviewId={interview.id}
+                coverImage={interview.coverImage}
                 role={interview.role}
                 type={interview.type}
                 techstack={interview.techstack}
@@ -74,6 +69,7 @@ async function Home() {
                 key={interview.id}
                 userId={user?.id}
                 interviewId={interview.id}
+                coverImage={interview.coverImage}
                 role={interview.role}
                 type={interview.type}
                 techstack={interview.techstack}
