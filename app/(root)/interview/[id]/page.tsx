@@ -38,7 +38,7 @@ const InterviewDetails = async ({ params }: RouteParams) => {
           <TechIcons techStack={interview.techstack} />
         </div>
 
-        <p className="bg-dark-200 px-4 py-2 rounded-lg h-fit">
+        <p className="bg-primary px-4 py-2 rounded-full h-fit capitalize font-semibold">
           {interview.type}
         </p>
       </div>
