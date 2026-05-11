@@ -4,7 +4,7 @@ import Image from "next/image";
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
 import TechStack from "@/components/page-components/TechStack";
-import { Calendar, Calendar1Icon, CalendarDays, Star } from 'lucide-react';
+import { CalendarDays, Star } from 'lucide-react';
 
 
 const InterviewCard = ({interviewId, coverImage, role, type, techstack, createdAt} : InterviewCardProps) => {
@@ -12,7 +12,7 @@ const InterviewCard = ({interviewId, coverImage, role, type, techstack, createdA
     const normalizedType = /mix/gi.test(type) ? "mixed" : type;
     const formattedDate = dayjs(feedback?.createdAt || createdAt || Date.now()).format('MMM D, YYYY');
     return (
-        <div className="border border-input rounded-xl max-w-[360px] max-sm:w-full">
+        <div className="border border-input rounded-xl">
             <div className="card-interview">
                 <div>
                     <div className="absolute top-0 right-0 w-fit px-3 py-2 rounded-bl-lg bg-primary">

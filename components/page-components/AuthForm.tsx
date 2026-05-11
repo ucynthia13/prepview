@@ -80,12 +80,14 @@ const AuthForm = ({ type }: { type: formType }) => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
-      {/* Left panel */}
       <div className="flex flex-col justify-center items-center w-full border-r border-input/50">
-        <div className="flex flex-row gap-2 justify-center mb-4">
-          <h1 className="font-bold text-3xl md:text-4xl">PrepView</h1>
+        <div className="flex flex-col gap-2 justify-center items-center mb-10">
+          <h1 className="font-bold text-3xl">Prepview</h1>
+          <p className="text-muted-foreground">
+            AI Interview Prep Platform
+          </p>
         </div>
-        <div className="flex flex-col p-14 gap-6 max-w-xl w-full mx-auto">
+        <div className="flex flex-col px-14 gap-4 max-w-lg w-full mx-auto">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               {type === "signup" && (
@@ -93,7 +95,7 @@ const AuthForm = ({ type }: { type: formType }) => {
                   control={form.control}
                   name="fullNames"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="gap-2">
                       <FormLabel htmlFor="fullNames">Full Names</FormLabel>
                       <FormControl>
                         <Input {...field} id="fullNames" placeholder="Enter your full names" />
@@ -107,7 +109,7 @@ const AuthForm = ({ type }: { type: formType }) => {
                 control={form.control}
                 name="email"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="gap-2">
                     <FormLabel htmlFor="email">Email address</FormLabel>
                     <FormControl>
                       <Input {...field} id="email" placeholder="Enter your email address" />
@@ -120,7 +122,7 @@ const AuthForm = ({ type }: { type: formType }) => {
                 control={form.control}
                 name="password"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="gap-2">
                     <FormLabel htmlFor="password">Password</FormLabel>
                     <FormControl>
                       <PasswordInput
@@ -135,7 +137,7 @@ const AuthForm = ({ type }: { type: formType }) => {
               />
               <Link
                 href="/forgot-password"
-                className="text-sm text-end block text-primary underline"
+                className="text-sm text-end block underline"
               >
                 Forgot password?
               </Link>
@@ -145,31 +147,38 @@ const AuthForm = ({ type }: { type: formType }) => {
               >
                 {type === "signup" ? "Create Account" : "Login"}
               </Button>
-              {type === "signup" ? (
-                <p className="text-sm">
-                  Already have an account?
-                  <span>
-                    <Link href="/login" className="font-bold underline">
-                      {" "}Login
-                    </Link>
-                  </span>
-                </p>
-              ) : (
-                <p className="text-sm text-end">
-                  Have no account?
-                  <span>
-                    <Link href="/signup" className="font-bold underline">
-                      {" "}Signup
-                    </Link>
-                  </span>
-                </p>
-              )}
             </form>
           </Form>
+          <p className="text-sm text-muted-foreground font-bold text-center">
+            OR
+          </p>
+          <div className="">
+            <Button variant="outline" className="w-full rounded-lg py-6 cursor-pointer">
+              Sign in with Google
+            </Button>
+          </div>
+          {type === "signup" ? (
+            <p className="text-sm">
+              Already have an account?
+              <span>
+                <Link href="/login" className="font-bold underline">
+                  {" "}Login
+                </Link>
+              </span>
+            </p>
+          ) : (
+            <p className="text-sm text-end">
+              Have no account?
+              <span>
+                <Link href="/signup" className="font-bold underline">
+                  {" "}Signup
+                </Link>
+              </span>
+            </p>
+          )}
         </div>
       </div>
 
-      {/* Right panel */}
       <div className="hidden lg:block">
         <img
           src="/auth-bg.jpg"
