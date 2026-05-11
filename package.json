@@ -13,6 +13,7 @@
     "@hookform/resolvers": "^5.0.0",
     "@radix-ui/react-label": "^2.1.2",
     "@radix-ui/react-slot": "^1.1.2",
+    "@sentry/nextjs": "^10.52.0",
     "@vapi-ai/web": "^2.2.5",
     "ai": "^4.3.4",
     "class-variance-authority": "^0.7.1",
